@@ -10,16 +10,18 @@ public class Manager : Singleton<Manager>
 
     #endregion
 
-    #region cores
+    #region Cores
     UI_Manager ui = new UI_Manager();
     Scene_Manager scene = new Scene_Manager();
     Input_Manager input = new Input_Manager();
+    Pool_Manager pool = new Pool_Manager();
+    Resource_Manager resource = new Resource_Manager();
     public static UI_Manager UI { get { return Instance.ui; } }
     public static Scene_Manager Scene { get {  return Instance.scene; } }
     public static Input_Manager Input { get {  return Instance.input; } }
+    public static Pool_Manager Pool { get { return Instance.pool; } }
+    public static Resource_Manager Resource { get { return Instance.resource; } }
     #endregion
-
-    public int a;
 
     private void Awake()
     {
@@ -41,16 +43,20 @@ public class Manager : Singleton<Manager>
 
     }
 
-    private void InitManagers()
+    private static void InitManagers()
     {
-        UI.InitUIManager();
-        Scene.InitSceneManager();
         Input.InitInputManager();
+        Pool.InitPoolManger();
     }
 
     private void StartManagers()
     {
         Input.StartInputManager();
+    }
+
+    public static void Clear()
+    {
+
     }
 
     private void OnDisable()
