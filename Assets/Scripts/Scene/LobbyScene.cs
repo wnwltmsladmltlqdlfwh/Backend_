@@ -10,6 +10,7 @@ public class LobbyScene : BaseScene
     }
 
     UI_LobbyScene _lobby = null;
+    UI_LobbyScene_Wallet _wallet = null;
     Dictionary<int, UI_PopUp> _popups = new Dictionary<int, UI_PopUp>();
 
     protected override void Init()
@@ -20,6 +21,7 @@ public class LobbyScene : BaseScene
         lobbyType = Define.LobbyUI.Main;
 
         _lobby = Manager.UI.ShowSceneUI<UI_LobbyScene>();
+        _wallet = Manager.UI.ShowSceneUI<UI_LobbyScene_Wallet>();
 
         Debug.Log("·Îºñ Init");
     }

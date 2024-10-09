@@ -30,7 +30,7 @@ public class UI_Manager
 
         if(sort)
         {
-            if (sortingorder != 0)
+            if (sortingorder > 0)
             {
                 canvas.sortingOrder = sortingorder;
             }
