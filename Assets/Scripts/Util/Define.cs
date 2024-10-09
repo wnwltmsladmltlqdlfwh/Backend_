@@ -7,9 +7,9 @@ public class Define
     public enum Scenes
     {
         Unknown,
-        Login,
-        Lobby,
-        Battle
+        LoginScene,
+        LobbyScene,
+        BattleScene,
     }
 
     public enum LobbyUI
