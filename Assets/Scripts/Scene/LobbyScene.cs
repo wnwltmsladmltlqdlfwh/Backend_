@@ -28,6 +28,6 @@ public class LobbyScene : BaseScene
 
     public override void Clear()
     {
-        throw new System.NotImplementedException();
+
     }
 }

@@ -52,6 +52,8 @@ public class UI_LobbyScene : UI_Scene
 
     private void BattleTab(PointerEventData data)
     {
+        string battlePath = $"Lobby/{typeof(UI_Lobby_Battle).Name}";
+        Manager.UI.ShowPopUpUI<UI_Lobby_Battle>(battlePath);
         Debug.Log("For Test Tab : Battle");
     }
 }

@@ -45,4 +45,23 @@ public class Define
         Drag,
         DragEnd,
     }
+
+    public enum State
+    {
+        Moving,
+        Idle,
+        Attack,
+        Skill_1,
+        Skill_2,
+        Ultimate,
+        Groggy,
+        Die,
+    }
+
+    public enum WorldObjectType
+    {
+        Unknown,
+        Playable,
+        Monster,
+    }
 }
