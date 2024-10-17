@@ -19,6 +19,16 @@ public class Scene_Manager
         return name;
     }
 
+    public bool CheckCurrentScene(Define.Scenes scenes)
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        if(currentScene.name == GetSceneType(scenes))
+            return true;
+
+        return false;
+    }
+
     public void Clear()
     {
         CurrentScene.Clear();

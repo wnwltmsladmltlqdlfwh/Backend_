@@ -68,7 +68,7 @@ public class Pool_Manager
     Dictionary<string, Pool> _pool = new Dictionary<string, Pool>();
     Transform _root;
 
-    public void InitPoolManger()
+    public void Init()
     {
         if(_root == null)
         {

@@ -13,7 +13,7 @@ public class Input_Manager
     public delegate void EndToruchEvent(Vector2 position, float time);
     public event EndToruchEvent OnEndTouch;
 
-    public void InitInputManager()
+    public void Init()
     {
         touchInput = new TouchInput();
     }
