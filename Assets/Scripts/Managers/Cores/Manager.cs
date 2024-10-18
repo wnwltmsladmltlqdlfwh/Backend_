@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [DefaultExecutionOrder(-1)]
 public class Manager : Singleton<Manager>
 {
     #region Contents
-
+    BackendManager backend = new BackendManager();
+    public static BackendManager Backend { get { return Instance.backend; } }
     #endregion
 
     #region Cores
@@ -40,13 +38,14 @@ public class Manager : Singleton<Manager>
 
     private void Update()
     {
-
+        
     }
 
     private static void InitManagers()
     {
-        Input.InitInputManager();
-        Pool.InitPoolManger();
+        Backend.Init();
+        Input.Init();
+        Pool.Init();
     }
 
     private void StartManagers()

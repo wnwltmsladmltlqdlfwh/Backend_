@@ -78,7 +78,9 @@ public class Rufo : InGameBaseController
         yield return new WaitUntil(() => AnimatorIsDone(0, "Skill1_6"));
         _anim.AnimationState.AddAnimation(0, "Skill1_7", false, 0);
 
+        yield return new WaitUntil(() => AnimatorIsDone(0, "Skill1_7"));
         usingSkill = false;
+        _state = Define.State.Idle;
     }
 
     private bool AnimatorIsDone(int trackIndex, string animationName)
