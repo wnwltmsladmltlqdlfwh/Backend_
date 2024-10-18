@@ -28,52 +28,19 @@ public class UI_LoginScene : UI_Scene
         Bind<Button>(typeof(Buttons));
         Bind<Text>(typeof(LoginText));
 
-        GetButton((int)Buttons.LoginButton).gameObject.BindEvent(Login, Define.UIEvent.Tab);
-        GetButton((int)Buttons.SignButton).gameObject.BindEvent(SignUp, Define.UIEvent.Tab);
+        Get<InputField>((int)InputFields.IdInputField).onValueChanged.AddListener(IdValueChanged);
+        Get<InputField>((int)InputFields.PwInputField).onValueChanged.AddListener(PwValueChanged);
+
+        GetButton((int)Buttons.LoginButton).gameObject.BindEvent(Manager.Login.Login, Define.UIEvent.Tab);
+        GetButton((int)Buttons.SignButton).gameObject.BindEvent(Manager.Login.SignUp, Define.UIEvent.Tab);
     }
 
-    private void Login(PointerEventData eventData)
+    private void IdValueChanged(string value)
     {
-        string id = Get<InputField>((int)InputFields.IdInputField).text;
-        string pw = Get<InputField>((int)InputFields.PwInputField).text;
-
-        Debug.Log("로그인 요청");
-        
-        BackendReturnObject bro = Backend.BMember.CustomLogin(id, pw);
-
-        if(bro.IsSuccess())
-        {
-            Debug.Log("로그인 성공" + bro);
-            UserDataUpdate();
-            //Manager.Scene.LoadScene(Define.Scenes.LobbyScene);
-        }
-        else
-        {
-            Debug.LogError("로그인 실패" + bro);
-        }
+        Manager.Login._id = value;
     }
-
-    private void SignUp(PointerEventData eventData)
+    private void PwValueChanged(string value)
     {
-        string id = Get<InputField>((int)InputFields.IdInputField).text;
-        string pw = Get<InputField>((int)InputFields.PwInputField).text;
-
-        BackendReturnObject bro = Backend.BMember.CustomSignUp(id, pw);
-
-        if (bro.IsSuccess())
-        {
-            Debug.Log("회원가입 성공" + bro);
-        }
-        else
-        {
-            Debug.Log("회원가입 실패" + bro);
-        }
-    }
-
-    private BackendGameData _backendGameData = new BackendGameData();
-
-    private void UserDataUpdate()
-    {
-        _backendGameData.SaveUserData(10);
+        Manager.Login._pw = value;
     }
 }

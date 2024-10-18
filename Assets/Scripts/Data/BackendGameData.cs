@@ -1,6 +1,7 @@
 using BackEnd;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UserData
@@ -67,6 +68,12 @@ public class BackendGameData
                 {
                     //게임 정보DB에 자신의 데이터를 추가한다.
                     InsertUserData(selectedProbabilityField);
+                }
+
+                if (Manager.Login._dataSave == false)
+                {
+                    Manager.Login._dataSave = !Manager.Login._dataSave;
+                    Debug.LogFormat("데이터 저장 완료 : {0}", Manager.Login._dataSave);
                 }
                 break;
         }

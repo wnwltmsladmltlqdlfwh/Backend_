@@ -26,6 +26,7 @@ public class BackendManager
         }
     }
 
+    #region 데이터저장
     // 차트 ID와 반복 횟수, 연결이 됐을 경우 실행할 함수를 받아 서버 GameData란에 정보를 추가하는 함수
     public void GameDataInsert(string selectedProbabilityField, int maxRepeatCount, Param param,
         Action<BackendReturnObject> onCompleted = null)
@@ -199,4 +200,41 @@ public class BackendManager
             }
         }
     }
+    #endregion
+    #region 데이터 불러오기
+    public void GetChartData(string seletedProbabilityField, int maxRepeatCount = 10, Action<BackendReturnObject> onCompleted = null)
+    {
+        if (!Backend.IsLogin)
+        {
+            Debug.Log("로그인이 되어있지 않음");
+            return;
+        }
+
+        if(maxRepeatCount <= 0)
+        {
+            Debug.LogError("연결 실패 : 반복횟수 초과");
+            return;
+        }
+
+        BackendReturnObject bro = Backend.Chart.GetOneChartAndSave(seletedProbabilityField);
+
+        switch (ErrorCheck(bro))
+        {
+            case BackendState.Failure:
+                Debug.Log("연결 실패");
+                break;
+            case BackendState.Maintainance:
+                Debug.Log("서버 점검 중");
+                break;
+            case BackendState.Retry:
+                Debug.Log("재시도");
+                GetChartData(seletedProbabilityField, maxRepeatCount - 1, onCompleted);
+                break;
+            case BackendState.Success:
+                Debug.Log("연결 성공");
+                onCompleted?.Invoke(bro);
+                break;
+        }
+    }
+    #endregion
 }

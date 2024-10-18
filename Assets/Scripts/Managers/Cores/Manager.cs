@@ -5,7 +5,9 @@ public class Manager : Singleton<Manager>
 {
     #region Contents
     BackendManager backend = new BackendManager();
+    LoginManager login = new LoginManager();
     public static BackendManager Backend { get { return Instance.backend; } }
+    public static LoginManager Login { get { return Instance.login; } }
     #endregion
 
     #region Cores
