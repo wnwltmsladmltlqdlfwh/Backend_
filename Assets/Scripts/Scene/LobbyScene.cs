@@ -23,6 +23,8 @@ public class LobbyScene : BaseScene
         _lobby = Manager.UI.ShowSceneUI<UI_LobbyScene>();
         _wallet = Manager.UI.ShowSceneUI<UI_LobbyScene_Wallet>();
 
+        BackendGameData.Instance.GameDataLoad();
+
         Debug.Log("·Îºñ Init");
     }
 

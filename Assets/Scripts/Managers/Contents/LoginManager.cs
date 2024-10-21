@@ -49,7 +49,7 @@ public class LoginManager
 
     private void UserDataUpdate()
     {
-        _backendGameData.SaveUserData(10);
+        BackendGameData.Instance.SaveUserData(10);
         _chartBaseData.LoadData();
 
         while (_dataSave == false && _dataLoad == false)

@@ -6,16 +6,47 @@ using UnityEngine;
 
 public class UserData
 {
-    public int _int = 1;
-    public float _float = 3.5f;
-    public string _str = string.Empty;
-    public Dictionary<string, int> _dic = new Dictionary<string, int>();
-    public List<string> _list = new List<string>();
+    public int level;
+    public int experience;
+    public int gold;
+    public int paidElif;
+    public int freeElif;
+    public int redCandy;
+
+    public void Reset()
+    {
+        level = 1;
+        experience = 0;
+        gold = 0;
+        paidElif = 0;
+        freeElif = 0;
+        redCandy = 0;
+    }
 }
 
 public class BackendGameData
 {
-    public UserData _userData = new UserData();
+    [System.Serializable]
+    public class GameDataLoadEvent : UnityEngine.Events.UnityEvent { }
+    public GameDataLoadEvent onGameDataLoadEvent = new GameDataLoadEvent();
+
+    private static BackendGameData instance = null;
+    public static BackendGameData Instance
+    {
+        get
+        {
+            if(instance == null)
+            {
+                instance = new BackendGameData();
+            }
+            return instance;
+        }
+    }
+
+    private UserData userGameData = new UserData();
+    public UserData UserGameData => userGameData;
+
+    private string gameDataRowInDate = string.Empty;
 
     public void SaveUserData(int maxRepeatCount)
     {
@@ -82,7 +113,17 @@ public class BackendGameData
     // 게임 정보DB에 자신의 데이터를 추가하는 함수
     public void InsertUserData(string selectedProbabilityField)
     {
-        Param param = new Param();
+        userGameData.Reset();
+
+        Param param = new Param()
+        {
+            { "level", userGameData.level},
+            { "experience", userGameData.experience },
+            { "gold", userGameData.gold},
+            { "paidElif", userGameData.paidElif },
+            { "freeElif", userGameData.freeElif },
+            {"redCandy", userGameData.redCandy},
+        };
         Debug.LogFormat("게임 정보 데이터 삽입을 요청합니다.");
         Manager.Backend.GameDataInsert(selectedProbabilityField, 10, param);
     }
@@ -90,19 +131,67 @@ public class BackendGameData
     //게임 정보DB에 존재하는 자신의 데이터를 갱신하는 함수
     public void UpdateUserData(string selectedProbabilityField, string inDate)
     {
-        Param param = new Param();
+        Param param = new Param()
+        {
+            { "level", userGameData.level},
+            { "experience", userGameData.experience },
+            { "gold", userGameData.gold},
+            { "paidElif", userGameData.paidElif },
+            { "freeElif", userGameData.freeElif },
+            {"redCandy", userGameData.redCandy},
+        };
         Debug.LogFormat("게임 정보 데이터 수정을 요청합니다.");
         Manager.Backend.GameDataUpdate(selectedProbabilityField, inDate, 10, param);
     }
 
-    public Param GetUserDataParam()
+    public void GameDataLoad()
     {
-        Param param = new Param();
-        param.Add("_int", _userData._int);
-        param.Add("_float", _userData._float);
-        param.Add("_str", _userData._str);
-        param.Add("_dic", _userData._dic);
-        param.Add("_list", _userData._list);
-        return param;
+        Backend.GameData.GetMyData("UserData", new Where(), callback =>
+        {
+            // 게임 정보 불러오기 성공 시
+            if (callback.IsSuccess())
+            {
+
+                Debug.Log($"게임 정보 데이터 불러오기에 성공했습니다. : {callback}");
+
+                //JSON 데이터 파싱 성공
+                try
+                {
+                    LitJson.JsonData gameDataJson = callback.FlattenRows();
+
+                    if (gameDataJson.Count <= 0)
+                    {
+                        Debug.LogWarning("데이터가 존재하지 않습니다.");
+                    }
+                    else
+                    {
+                        //불러운 게임 정보의 고유값
+                        gameDataRowInDate = gameDataJson[0]["inDate"].ToString();
+                        //불러운 게임 정보를 userGameData 변수 저장
+                        userGameData.level = int.Parse(gameDataJson[0]["level"].ToString());
+                        userGameData.experience = int.Parse(gameDataJson[0]["experience"].ToString());
+                        userGameData.gold = int.Parse(gameDataJson[0]["gold"].ToString());
+                        userGameData.paidElif = int.Parse(gameDataJson[0]["paidElif"].ToString());
+                        userGameData.freeElif = int.Parse(gameDataJson[0]["freeElif"].ToString());
+                        userGameData.redCandy = int.Parse(gameDataJson[0]["redCandy"].ToString());
+
+                        onGameDataLoadEvent?.Invoke();
+                    }
+                }
+                //Json 데이터 파싱 실패
+                catch (System.Exception e)
+                {
+                    //유저 정보를 초기값으로 설정
+                    userGameData.Reset();
+                    //try-catch 에러 출력
+                    Debug.LogError(e);
+                }
+            }
+            // 실패 시
+            else
+            {
+                Debug.LogError($"게임 정보 데이터 불러오기에 실패했습니다. : {callback}");
+            }
+        });
     }
 }

@@ -37,6 +37,8 @@ public class UI_LobbyScene : UI_Scene
 
     private void CharactorTab(PointerEventData data)
     {
+        string charactoraPath = $"Lobby/{typeof(UI_Lobby_Charactor).Name}";
+        Manager.UI.ShowPopUpUI<UI_Lobby_Charactor>(charactoraPath);
         Debug.Log("For Test Tab : Charactor");
     }
 

@@ -1246,10 +1246,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7732816342773721187}
+  - component: {fileID: 9179621224315621740}
   - component: {fileID: 6229853162460964651}
   - component: {fileID: 5167724667109606737}
   - component: {fileID: 648948564715689084}
-  - component: {fileID: 9179621224315621740}
   m_Layer: 5
   m_Name: UI_Lobby_Battle
   m_TagString: Untagged
@@ -1279,6 +1279,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &9179621224315621740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6060534197715162706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c4b1933caac2634a92f2d04dd7fbf3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!223 &6229853162460964651
 Canvas:
   m_ObjectHideFlags: 0
@@ -1342,18 +1354,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &9179621224315621740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6060534197715162706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c4b1933caac2634a92f2d04dd7fbf3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6087533228939129575
 GameObject:
   m_ObjectHideFlags: 0

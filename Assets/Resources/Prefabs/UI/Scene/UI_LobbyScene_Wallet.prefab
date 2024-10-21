@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 345438264259292081}
   - component: {fileID: 4359101985101197319}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: GoldText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -771,7 +771,7 @@ GameObject:
   - component: {fileID: 4214466325726078974}
   - component: {fileID: 6933571104121666712}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: ElifText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1240,7 +1240,7 @@ GameObject:
   - component: {fileID: 1849411025516414754}
   - component: {fileID: 269126144182746104}
   m_Layer: 5
-  m_Name: CashButton
+  m_Name: ElifButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1481,7 +1481,7 @@ GameObject:
   - component: {fileID: 6066127103165631878}
   - component: {fileID: 9148161601166663362}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: CandyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
